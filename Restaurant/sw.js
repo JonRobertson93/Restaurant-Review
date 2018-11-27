@@ -4,7 +4,7 @@ let CACHE = 'cache-only';
 // if cache matches, return that cache. Otherwise fetch the cache
 self.addEventListener('fetch', function(event){
 	event.respondWith(
-		caches.match(event.request).then(function(response) {
+		caches.match(event.request, {ignoreSearch:true}).then(function(response) {
 			if (response) return response;
 			return fetch(event.request);
 		})
@@ -19,6 +19,7 @@ self.addEventListener('install', function(event) {
 			return cache.addAll([
 				'/',
 				'/index.html',
+				'/restaurant.html',
 				'/css/styles.css',
 				'/css/responsive.css',
 				'/js/dbhelper.js',
